@@ -8,13 +8,20 @@ use App\Contact;
 class ContactService
 {
 	
-	public static function findByName(): Contact
+	public static function findByName($name): Contact
 	{
 		// queries to the db
+		
+		return null;
 	}
 
 	public static function validateNumber(string $number): bool
 	{
-		// logic to validate numbers
+		if(is_numeric($number)) {
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

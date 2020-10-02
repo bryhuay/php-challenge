@@ -1,13 +1,31 @@
 <?php
 
 namespace App;
+use App\Interfaces\CarrierInterface;
+use App\Services\ContactService;
+
 
 
 class Contact
 {
 	
-	function __construct()
+	protected $provider;
+	
+	function __construct(CarrierInterface $provider = null)
 	{
-		# code...
+		$this->provider = $provider;
+	}
+
+
+	public function makeCallByName($name = '')
+	{
+		if( empty($name) ) return;
+
+		$contact = ContactService::findByName($name);
+		
+		if( $contact == null) return;
+		$this->provider->dialContact($contact);
+
+		return $this->provider->makeCall();
 	}
 }
